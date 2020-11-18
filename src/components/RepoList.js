@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import RepoContributors from './RepoContributors';
 import axios from 'axios';
 
@@ -12,9 +12,27 @@ const RepoList = () => {
   const [sort, setSort] = useState('created');
   const [direction, setDirection] = useState('asc');
   const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   
-  const [previousDisabled, setPreviousDisabled] = useState(true);
-  const [nextDisabled, setNextDisabled] = useState(false);
+  const observer = useRef();
+  const lastRepoElement = useCallback(repo => {
+    if (loading) return
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        console.log('last');
+        setPage(prevPage => {
+          return prevPage + 1;
+        })
+      }
+    });
+    if (repo) observer.current.observe(repo);
+    console.log(repo);
+  }, [loading, hasMore]);
+  
+  // const [previousDisabled, setPreviousDisabled] = useState(true);
+  // const [nextDisabled, setNextDisabled] = useState(false);
   
   const REQUEST_REPO_URL = `${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${page}`;
   
@@ -30,46 +48,40 @@ const RepoList = () => {
     setDirection(e.target.value);
   };
   
-  const handlePreviousPage = (e) => {
-    if (page > 1) {
-      const newPage = page - 1;
-      setPage(newPage);
-      if (newPage === 1) {
-        setPreviousDisabled(true);
-      }
-    }
-    setPreviousDisabled(false);
-  };
+  // const handlePreviousPage = (e) => {
+  //   if (page > 1) {
+  //     const newPage = page - 1;
+  //     setPage(newPage);
+  //     if (newPage === 1) {
+  //       setPreviousDisabled(true);
+  //     }
+  //   }
+  //   setNextDisabled(false);
+  // };
   
-  const handleNextPage = (e) => {
-    const newPage = page + 1;
-    setPage(newPage);
-    if (newPage > 1) {
-      setPreviousDisabled(false);
-    }
-    // axios.get(`${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${newPage + 1}`, {
-    //   headers: {
-    //     'Authorization': ACCESS_TOKEN,
-    //   }
-    // })
-    // .then(res => {
-    //   console.log(res.data);
-    //   if (res.data.length === 0) {
-    //     setPreviousDisabled(true);
-    //   }
-    // })
-    // .catch(err => console.log(err));
-  };
+  // const handleNextPage = (e) => {
+  //   const newPage = page + 1;
+  //   setPage(newPage);
+  //   if (newPage > 1) {
+  //     setPreviousDisabled(false);
+  //   }
+  // };
   
   useEffect(() => {
+    setLoading(true);
     axios.get(REQUEST_REPO_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
+        // 'User-Agent': 'request'
       }
     })
     .then(res => {
       console.log(res.data);
-      setRepos(res.data);
+      setRepos(prevRepos => {
+        return [...prevRepos, ...res.data]
+      });
+      setHasMore(res.data.length > 0);
+      setLoading(false);
     })
     .catch(err => console.log(err));
   }, [page, type, sort, direction]);
@@ -97,42 +109,76 @@ const RepoList = () => {
       <hr />
       <ul>
         {
-          repos.map(repo => {
-            return (
-              <li key={repo.id}>
-                <h3>{repo.name}</h3>
-                <p>{repo.description}</p>
-                {
-                  repo.fork ? (
-                    <p>Forked</p>
-                  ) : (
-                    <p>Not Forked</p>
-                  )
-                }
-                <h4>GitHub URL:</h4>
-                <p>{repo.html_url}</p>
-                <h4>Stars:</h4>
-                <p>{repo.stargazers_count}</p>
-                <h4>Watchers:</h4>
-                <p>{repo.watchers_count}</p>
-                <h4>Language:</h4>
-                <p>{repo.language}</p>
-                <h4>License:</h4>
-                {
-                  repo.license ? (
-                    <p>{repo.license.name}</p>
-                  ) : (
-                    <p>N/A</p>
-                  )
-                }
-                <RepoContributors repoName={repo.name}/>
-              </li>
-            )
+          repos.map((repo, index) => {
+            if (repos.length === index + 1) {
+              return (
+                <li key={repo.id} ref={lastRepoElement}>
+                  <h3>{repo.name}</h3>
+                  <p>{repo.description}</p>
+                  {
+                    repo.fork ? (
+                      <p>Forked</p>
+                    ) : (
+                      <p>Not Forked</p>
+                    )
+                  }
+                  <h4>GitHub URL:</h4>
+                  <p>{repo.html_url}</p>
+                  <h4>Stars:</h4>
+                  <p>{repo.stargazers_count}</p>
+                  <h4>Watchers:</h4>
+                  <p>{repo.watchers_count}</p>
+                  <h4>Language:</h4>
+                  <p>{repo.language}</p>
+                  <h4>License:</h4>
+                  {
+                    repo.license ? (
+                      <p>{repo.license.name}</p>
+                    ) : (
+                      <p>N/A</p>
+                    )
+                  }
+                  <RepoContributors repoName={repo.name}/>
+                </li>
+              )
+            } else {
+              return (
+                <li key={repo.id} >
+                  <h3>{repo.name}</h3>
+                  <p>{repo.description}</p>
+                  {
+                    repo.fork ? (
+                      <p>Forked</p>
+                    ) : (
+                      <p>Not Forked</p>
+                    )
+                  }
+                  <h4>GitHub URL:</h4>
+                  <p>{repo.html_url}</p>
+                  <h4>Stars:</h4>
+                  <p>{repo.stargazers_count}</p>
+                  <h4>Watchers:</h4>
+                  <p>{repo.watchers_count}</p>
+                  <h4>Language:</h4>
+                  <p>{repo.language}</p>
+                  <h4>License:</h4>
+                  {
+                    repo.license ? (
+                      <p>{repo.license.name}</p>
+                    ) : (
+                      <p>N/A</p>
+                    )
+                  }
+                  <RepoContributors repoName={repo.name}/>
+                </li>
+              )
+            }
           })
         }
       </ul>
-      <button disabled={previousDisabled} onClick={handlePreviousPage}>Previous</button>
-      <button disabled={nextDisabled} onClick={handleNextPage}>Next</button>
+      <div>{loading && "Loading..."}</div>
+      {/* <button disabled={previousDisabled} onClick={handlePreviousPage}>Previous</button>
+      <button disabled={nextDisabled} onClick={handleNextPage}>Next</button> */}
     </div>
   )
 };
