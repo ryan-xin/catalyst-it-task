@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RepoDetails = (props) => {
+const RepoContributors = (props) => {
   
-  const REPO_DETAIL_URL = `https://api.github.com/repos/catalyst/${props.repoName}/contributors?per_page=5`;
+  const REPO_CONTRIBUTORS_URL = `https://api.github.com/repos/catalyst/${props.repoName}/contributors?per_page=5`;
   const ACCESS_TOKEN = 'f75ceca1e36ec67b0f388a2595b70fe6ca806999';
   
   const [contributors, setContributors] = useState([]);
   
   useEffect(() => {
-    axios.get(REPO_DETAIL_URL, {
+    axios.get(REPO_CONTRIBUTORS_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
       }
@@ -46,4 +46,4 @@ const RepoDetails = (props) => {
   )
 };
 
-export default RepoDetails;
+export default RepoContributors;

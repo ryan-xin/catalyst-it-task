@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RepoDetails from './RepoDetails';
+import RepoContributors from './RepoContributors';
 import axios from 'axios';
 
 const RepoList = () => {
@@ -13,6 +13,9 @@ const RepoList = () => {
   const [direction, setDirection] = useState('asc');
   const [repos, setRepos] = useState([]);
   
+  const [previousDisabled, setPreviousDisabled] = useState(true);
+  const [nextDisabled, setNextDisabled] = useState(false);
+  
   const REQUEST_REPO_URL = `${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${page}`;
   
   const handleFilterChange = (e) => {
@@ -25,7 +28,38 @@ const RepoList = () => {
   
   const handleOrderChange = (e) => {
     setDirection(e.target.value);
-  }
+  };
+  
+  const handlePreviousPage = (e) => {
+    if (page > 1) {
+      const newPage = page - 1;
+      setPage(newPage);
+      if (newPage === 1) {
+        setPreviousDisabled(true);
+      }
+    }
+    setPreviousDisabled(false);
+  };
+  
+  const handleNextPage = (e) => {
+    const newPage = page + 1;
+    setPage(newPage);
+    if (newPage > 1) {
+      setPreviousDisabled(false);
+    }
+    // axios.get(`${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${newPage + 1}`, {
+    //   headers: {
+    //     'Authorization': ACCESS_TOKEN,
+    //   }
+    // })
+    // .then(res => {
+    //   console.log(res.data);
+    //   if (res.data.length === 0) {
+    //     setPreviousDisabled(true);
+    //   }
+    // })
+    // .catch(err => console.log(err));
+  };
   
   useEffect(() => {
     axios.get(REQUEST_REPO_URL, {
@@ -91,12 +125,14 @@ const RepoList = () => {
                     <p>N/A</p>
                   )
                 }
-                <RepoDetails repoName={repo.name}/>
+                <RepoContributors repoName={repo.name}/>
               </li>
             )
           })
         }
       </ul>
+      <button disabled={previousDisabled} onClick={handlePreviousPage}>Previous</button>
+      <button disabled={nextDisabled} onClick={handleNextPage}>Next</button>
     </div>
   )
 };
