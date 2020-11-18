@@ -7,6 +7,7 @@ function App() {
     <div>
       <h1>Catalyst IT Australia</h1>
       <Profile />
+      <hr />
       <RepoList />
     </div>
   );

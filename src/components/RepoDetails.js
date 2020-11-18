@@ -1,17 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RepoDetails = () => {
+const RepoDetails = (props) => {
   
-  const REPO_DETAIL_URL = `https://api.github.com/repos/catalyst/${}/contributors`;
+  const REPO_DETAIL_URL = `https://api.github.com/repos/catalyst/${props.repoName}/contributors?per_page=5`;
+  const ACCESS_TOKEN = 'f75ceca1e36ec67b0f388a2595b70fe6ca806999';
   
-  const [currentRepo, setCurrentRepo] = useState({
-    
-  });
+  const [contributors, setContributors] = useState([]);
+  
+  useEffect(() => {
+    axios.get(REPO_DETAIL_URL, {
+      headers: {
+        'Authorization': ACCESS_TOKEN,
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+      setContributors(res.data);
+    })
+    .catch(err => console.log(err));
+  }, []);
   
   return (
     <div>
-      <h2>Details</h2>
+      {
+        contributors.length > 0 && (
+          <div>
+            <h4>Top 5 Contributors:</h4>
+            <ul>
+              {
+                contributors.map(contributor => {
+                  return (
+                    <li key={contributor.id}>
+                      <p>{contributor.login}</p>
+                      <p>{contributor.contributions} contributions</p>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
     </div>
   )
 };
