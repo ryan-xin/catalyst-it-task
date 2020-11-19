@@ -1,0 +1,20 @@
+.profile-container {
+  flex: 0 0 370px;
+  background-color: #102B60;
+  color: #FFFFFF;
+  padding: 60px 40px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #2B4C8B;
+  margin: 40px 0;
+}
+
+li {
+  margin: 20px 0;
+}

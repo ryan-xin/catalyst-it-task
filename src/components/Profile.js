@@ -1,3 +1,4 @@
+import '../style/Profile.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -18,7 +19,8 @@ const Profile = () => {
   useEffect(() => {
     axios.get(ORG_URL, {
       headers: {
-        'Authorization': ACCESS_TOKEN
+        // 'Authorization': ACCESS_TOKEN,
+        'User-Agent': 'request'
       }
     })
     .then(res => {
@@ -36,20 +38,16 @@ const Profile = () => {
   }, []);
   
   return (
-    <div>
-      <h2>Profile</h2>
-      <h4>Name:</h4>
-      <p>{profile.name}</p>
-      <h4>Description:</h4>
-      <p>{profile.description}</p>
-      <h4>Location:</h4>
-      <p>{profile.location}</p>
-      <h4>Total Repositories:</h4>
-      <p>{profile.totalRepos}</p>
-      <h4>Blog URL:</h4>
-      <p>{profile.blogUrl}</p>
-      <h4>GitHub URL:</h4>
-      <p>{profile.gitHubUrl}</p>
+    <div className="profile-container">
+      <h1>{profile.name}</h1>
+      <h4>{profile.description}</h4>
+      <div className="divider"></div>
+      <ul>
+        <li><p>{profile.location}</p></li>
+        <li><p>{profile.totalRepos} Repositories</p></li>
+        <li><p>{profile.blogUrl}</p></li>
+        <li><p>{profile.gitHubUrl}</p></li>
+      </ul>
     </div>
   )
 };

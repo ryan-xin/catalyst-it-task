@@ -1,0 +1,29 @@
+.list-container {
+  /* flex: 0 0 auto; */
+  padding: 60px 0 0 40px;
+  /* overflow: hidden; */
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-sort-container {
+  display: flex;
+  gap: 40px;
+  /* position: absolute; */
+  background-color: #FFFFFF;
+  padding: 0 0 20px 0;
+}
+
+select {
+  margin: 10px 0;
+}
+
+.sort-select-container {
+  display: flex;
+  gap: 20px;
+}
+
+.list-item-container {
+  overflow: auto;
+}

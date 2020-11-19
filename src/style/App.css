@@ -1,0 +1,7 @@
+.main-container {
+  width: 1170px;
+  height: 90vh;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 20px 20px hsl(212, 24%, 86%);
+}

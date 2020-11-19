@@ -11,8 +11,8 @@ const RepoContributors = (props) => {
   useEffect(() => {
     axios.get(REPO_CONTRIBUTORS_URL, {
       headers: {
-        'Authorization': ACCESS_TOKEN,
-        // 'User-Agent': 'request'
+        // 'Authorization': ACCESS_TOKEN,
+        'User-Agent': 'request'
       }
     })
     .then(res => {
