@@ -9,12 +9,12 @@ h1 {
   margin-bottom: 20px;
 }
 
-.divider {
+.divider-profile {
   height: 1px;
   background-color: #2B4C8B;
   margin: 40px 0;
 }
 
-li {
+.profile-container li {
   margin: 20px 0;
 }

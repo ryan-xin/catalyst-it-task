@@ -32,9 +32,6 @@ const RepoList = () => {
     console.log(repo);
   }, [loading, hasMore]);
   
-  // const [previousDisabled, setPreviousDisabled] = useState(true);
-  // const [nextDisabled, setNextDisabled] = useState(false);
-  
   const REQUEST_REPO_URL = `${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${page}`;
   
   const handleFilterChange = (e) => {
@@ -53,7 +50,7 @@ const RepoList = () => {
     setLoading(true);
     axios.get(REQUEST_REPO_URL, {
       headers: {
-        // 'Authorization': ACCESS_TOKEN,
+        'Authorization': ACCESS_TOKEN,
         'User-Agent': 'request'
       }
     })
@@ -101,70 +98,100 @@ const RepoList = () => {
               if (repos.length === index + 1) {
                 return (
                   <li key={repo.id} ref={lastRepoElement}>
-                    <h3>{repo.name}</h3>
-                    <p>{repo.description}</p>
-                    {
-                      repo.fork ? (
-                        <p>Forked</p>
-                      ) : (
-                        <p>Not Forked</p>
-                      )
-                    }
-                    <h4>GitHub URL:</h4>
-                    <p>{repo.html_url}</p>
-                    <h4>Stars:</h4>
-                    <p>{repo.stargazers_count}</p>
-                    <h4>Watchers:</h4>
-                    <p>{repo.watchers_count}</p>
-                    <h4>Language:</h4>
-                    <p>{repo.language}</p>
-                    <h4>License:</h4>
-                    {
-                      repo.license ? (
-                        <p>{repo.license.name}</p>
-                      ) : (
-                        <p>N/A</p>
-                      )
-                    }
-                    <RepoContributors repoName={repo.name}/>
+                    <div className="divider-list"></div>
+                    <div className="list-item-header">
+                      <h2>{repo.name}</h2>
+                      {
+                        repo.fork ? (
+                          <p className="tag forked-tag">Forked</p>
+                        ) : (
+                          <p className="tag unforked-tag">Not Forked</p>
+                        )
+                      }
+                    </div>
+                    <h4>{repo.description}</h4>
+                    <div className="list-item-detail-container">
+                      <p>GitHub URL:</p>
+                      <h3>{repo.html_url}</h3>
+                      <div className="two-columns-layout">
+                        <div className="two-columns-item">
+                          <p>Stars:</p>
+                          <h3>{repo.stargazers_count}</h3>
+                        </div>
+                        <div>
+                          <p>Watchers:</p>
+                          <h3>{repo.watchers_count}</h3>
+                        </div>
+                        <div className="two-columns-item">
+                          <p>Language:</p>
+                          <h3>{repo.language}</h3>
+                        </div>
+                        <div>
+                          <p>License:</p>
+                          {
+                            repo.license ? (
+                              <h3>{repo.license.name}</h3>
+                            ) : (
+                              <h3>N/A</h3>
+                            )
+                          }
+                        </div>
+                      </div>
+                      <RepoContributors repoName={repo.name}/>
+                    </div>
                   </li>
                 )
               } else {
                 return (
-                  <li key={repo.id} >
-                    <h3>{repo.name}</h3>
-                    <p>{repo.description}</p>
-                    {
-                      repo.fork ? (
-                        <p>Forked</p>
-                      ) : (
-                        <p>Not Forked</p>
-                      )
-                    }
-                    <h4>GitHub URL:</h4>
-                    <p>{repo.html_url}</p>
-                    <h4>Stars:</h4>
-                    <p>{repo.stargazers_count}</p>
-                    <h4>Watchers:</h4>
-                    <p>{repo.watchers_count}</p>
-                    <h4>Language:</h4>
-                    <p>{repo.language}</p>
-                    <h4>License:</h4>
-                    {
-                      repo.license ? (
-                        <p>{repo.license.name}</p>
-                      ) : (
-                        <p>N/A</p>
-                      )
-                    }
-                    <RepoContributors repoName={repo.name}/>
+                  <li key={repo.id}>
+                    <div className="divider-list"></div>
+                    <div className="list-item-header">
+                      <h2>{repo.name}</h2>
+                      {
+                        repo.fork ? (
+                          <p className="tag forked-tag">Forked</p>
+                        ) : (
+                          <p className="tag unforked-tag">Not Forked</p>
+                        )
+                      }
+                    </div>
+                    <h4>{repo.description}</h4>
+                    <div className="list-item-detail-container">
+                      <p>GitHub URL:</p>
+                      <h3>{repo.html_url}</h3>
+                      <div className="two-columns-layout">
+                        <div className="two-columns-item">
+                          <p>Stars:</p>
+                          <h3>{repo.stargazers_count}</h3>
+                        </div>
+                        <div>
+                          <p>Watchers:</p>
+                          <h3>{repo.watchers_count}</h3>
+                        </div>
+                        <div className="two-columns-item">
+                          <p>Language:</p>
+                          <h3>{repo.language}</h3>
+                        </div>
+                        <div>
+                          <p>License:</p>
+                          {
+                            repo.license ? (
+                              <h3>{repo.license.name}</h3>
+                            ) : (
+                              <h3>N/A</h3>
+                            )
+                          }
+                        </div>
+                      </div>
+                      <RepoContributors repoName={repo.name}/>
+                    </div>
                   </li>
                 )
               }
             })
           }
         </ul>
-        <div>{loading && "Loading..."}</div>
+        <div className="loading">{loading && "Loading..."}</div>
       </div>
     </div>
   )

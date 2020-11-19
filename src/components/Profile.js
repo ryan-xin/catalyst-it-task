@@ -19,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     axios.get(ORG_URL, {
       headers: {
-        // 'Authorization': ACCESS_TOKEN,
+        'Authorization': ACCESS_TOKEN,
         'User-Agent': 'request'
       }
     })
@@ -41,7 +41,7 @@ const Profile = () => {
     <div className="profile-container">
       <h1>{profile.name}</h1>
       <h4>{profile.description}</h4>
-      <div className="divider"></div>
+      <div className="divider-profile"></div>
       <ul>
         <li><p>{profile.location}</p></li>
         <li><p>{profile.totalRepos} Repositories</p></li>

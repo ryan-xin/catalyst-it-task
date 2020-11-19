@@ -1,3 +1,4 @@
+import '../style/RepoContributors.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -11,7 +12,7 @@ const RepoContributors = (props) => {
   useEffect(() => {
     axios.get(REPO_CONTRIBUTORS_URL, {
       headers: {
-        // 'Authorization': ACCESS_TOKEN,
+        'Authorization': ACCESS_TOKEN,
         'User-Agent': 'request'
       }
     })
@@ -26,15 +27,14 @@ const RepoContributors = (props) => {
     <div>
       {
         contributors.length > 0 && (
-          <div>
-            <h4>Top 5 Contributors:</h4>
+          <div className="contributors-container">
+            <p>Top 5 Contributors:</p>
             <ul>
               {
                 contributors.map(contributor => {
                   return (
                     <li key={contributor.id}>
-                      <p>{contributor.login}</p>
-                      <p>{contributor.contributions} contributions</p>
+                      <h3>- {contributor.login}: {contributor.contributions} contributions</h3>
                     </li>
                   )
                 })

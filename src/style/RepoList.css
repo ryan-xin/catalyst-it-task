@@ -10,13 +10,21 @@
 .filter-sort-container {
   display: flex;
   gap: 40px;
-  /* position: absolute; */
   background-color: #FFFFFF;
-  padding: 0 0 20px 0;
+  padding: 0 0 10px 0;
 }
 
 select {
   margin: 10px 0;
+  border-radius: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #102B60;
+  color: #102B60;
+  background-color: #F4F8F9;
+  /* background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd; */
+  /* -webkit-appearance: none; */
+  /* background-position-x: 244px; */
 }
 
 .sort-select-container {
@@ -26,4 +34,67 @@ select {
 
 .list-item-container {
   overflow: auto;
+  padding-right: 40px;
+}
+
+.divider-list {
+  height: 1px;
+  background-color: #D8E0E6;
+  margin: 30px 0;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.list-item-detail-container h3 {
+  color: #2E3B4E;
+  margin-bottom: 25px;
+}
+
+.list-item-container h4 {
+  color: #2E3B4E;
+}
+
+.list-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forked-tag {
+  background-color: #2CAD88;
+  color: #FFFFFF;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+}
+
+.unforked-tag {
+  background-color: #F88111;
+  color: #FFFFFF;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+}
+
+.list-item-detail-container {
+  background-color: #F4F8F9;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.list-item-detail-container p {
+  color: #828A97;
+  margin-bottom: 10px;
+}
+
+.two-columns-layout {
+  display: flex;
+  gap: 50px;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px;
+  color: #828A97;
 }

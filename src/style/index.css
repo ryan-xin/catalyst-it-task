@@ -52,6 +52,15 @@ p {
   font-weight: bold;
 }
 
+::-webkit-scrollbar {
+  background: #E6EBEE;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #102B60;
+}
+
 /* -------------------- Small Desktop ------------------- */
 
 @media screen and (max-width: 1630px) {
