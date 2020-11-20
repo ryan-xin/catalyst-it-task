@@ -18,3 +18,23 @@ h1 {
 .profile-container li {
   margin: 20px 0;
 }
+
+.profile-list-container-location {
+  display: flex;
+  gap: 13px;
+}
+
+.profile-list-container-repos {
+  display: flex;
+  gap: 12px;
+}
+
+.profile-list-container-blog {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-list-container-github {
+  display: flex;
+  gap: 10px;
+}

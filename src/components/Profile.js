@@ -1,5 +1,10 @@
 import '../style/Profile.css';
 import React, { useState, useEffect } from 'react';
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faBlog } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 
 const Profile = () => {
@@ -43,10 +48,22 @@ const Profile = () => {
       <h4>{profile.description}</h4>
       <div className="divider-profile"></div>
       <ul>
-        <li><p>{profile.location}</p></li>
-        <li><p>{profile.totalRepos} Repositories</p></li>
-        <li><p>{profile.blogUrl}</p></li>
-        <li><p>{profile.gitHubUrl}</p></li>
+        <li className="profile-list-container-location">
+          <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <p>{profile.location}</p>
+        </li>
+        <li className="profile-list-container-repos">
+          <FontAwesomeIcon icon={faBook} />
+          <p>{profile.totalRepos} Repositories</p>
+        </li>
+        <li className="profile-list-container-blog">
+          <FontAwesomeIcon icon={faBlog} />
+          <p>{profile.blogUrl}</p>
+        </li>
+        <li className="profile-list-container-github">
+          <FontAwesomeIcon icon={faGithub} />
+          <p>{profile.gitHubUrl}</p>
+        </li>
       </ul>
     </div>
   )
