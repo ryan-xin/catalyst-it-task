@@ -1,15 +1,12 @@
 .list-container {
-  /* flex: 0 0 auto; */
-  padding: 60px 0 0 40px;
-  /* overflow: hidden; */
-  /* position: relative; */
+  padding: 60px 0 0 60px;
   display: flex;
   flex-direction: column;
 }
 
 .filter-sort-container {
   display: flex;
-  gap: 40px;
+  gap: 50px;
   background-color: #FFFFFF;
   padding: 0 0 10px 0;
 }
@@ -18,13 +15,14 @@ select {
   margin: 10px 0;
   border-radius: 0;
   height: 36px;
+  font-size: 16px;
+  width: 200px;
   padding: 0 10px;
   border: 1px solid #102B60;
   color: #102B60;
-  background-color: #F4F8F9;
-  /* background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd; */
-  /* -webkit-appearance: none; */
-  /* background-position-x: 244px; */
+  background: url("./images/arrow_down.svg") no-repeat right #F4F8F9;
+  -webkit-appearance: none;
+  background-position-x: 175px;
 }
 
 .sort-select-container {
@@ -34,7 +32,7 @@ select {
 
 .list-item-container {
   overflow: auto;
-  padding-right: 40px;
+  padding-right: 60px;
 }
 
 .divider-list {
