@@ -11,5 +11,5 @@ Design tool: Sketch
 ## 2. To Do List
 
 - Customize select dropdown style;
-- For mobile layout, fix filter section at the top of the screen;
-- Refactor to meet WCAG 2.1 Level AA guidelines for accessibility;
+- For mobile layout, fix filter section at the top of the screen after scroll;
+- Refactor to meet all WCAG 2.1 Level AA guidelines for accessibility;
