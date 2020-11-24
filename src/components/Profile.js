@@ -58,11 +58,11 @@ const Profile = () => {
         </li>
         <li className="profile-list-container-blog">
           <FontAwesomeIcon icon={faBlog} />
-          <p>{profile.blogUrl}</p>
+          <a href={profile.blogUrl}>{profile.blogUrl}</a>
         </li>
         <li className="profile-list-container-github">
           <FontAwesomeIcon icon={faGithub} />
-          <p>{profile.gitHubUrl}</p>
+          <a href={profile.gitHubUrl}>{profile.gitHubUrl}</a>
         </li>
       </ul>
     </div>

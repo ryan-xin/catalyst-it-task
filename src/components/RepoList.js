@@ -128,7 +128,7 @@ const RepoList = () => {
                     <h4>{repo.description}</h4>
                     <div className="list-item-detail-container">
                       <p>GitHub URL:</p>
-                      <h3>{repo.html_url}</h3>
+                      <a className= "repo-url" href={repo.html_url}>{repo.html_url}</a>
                       <div className="two-columns-layout">
                         <div>
                           <p>Stars:</p>
@@ -174,7 +174,7 @@ const RepoList = () => {
                     <h4>{repo.description}</h4>
                     <div className="list-item-detail-container">
                       <p>GitHub URL:</p>
-                      <h3>{repo.html_url}</h3>
+                      <a className= "repo-url" href={repo.html_url}>{repo.html_url}</a>
                       <div className="two-columns-layout">
                         <div>
                           <p>Stars:</p>
