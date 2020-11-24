@@ -61,7 +61,7 @@ p {
   background: #102B60;
 }
 
-/* -------------------- Small Desktop ------------------- */
+/* -------------------- Responsive ------------------- */
 
 @media screen and (max-width: 1170px) {
   body,

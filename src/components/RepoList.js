@@ -51,7 +51,7 @@ const RepoList = () => {
     axios.get(REQUEST_REPO_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
-        'User-Agent': 'ryan-xin'
+        // 'User-Agent': 'ryan-xin'
       }
     })
     .then(res => {
@@ -70,7 +70,7 @@ const RepoList = () => {
     axios.get(REQUEST_REPO_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
-        'User-Agent': 'ryan-xin'
+        // 'User-Agent': 'ryan-xin'
       }
     })
     .then(res => {

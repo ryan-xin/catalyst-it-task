@@ -8,7 +8,7 @@
   display: flex;
   gap: 50px;
   background-color: #FFFFFF;
-  padding: 0 0 10px 0;
+  padding: 0 60px 10px 0;
 }
 
 select {
@@ -105,17 +105,23 @@ h2 {
   color: #828A97;
 }
 
+/* -------------------- Responsive ------------------- */
+
 @media screen and (max-width: 1170px) {
   .list-container {
     overflow: auto;
   }
   
   .list-container {
-    padding: 60px 0 0 40px;
+    padding: 40px 0 0 40px;
   }
   
   .list-item-container {
     padding-right: 40px;
+  }
+
+  .filter-sort-container {
+    padding: 0 40px 10px 0;
   }
 }
 
@@ -134,7 +140,41 @@ h2 {
 
 @media screen and (max-width: 555px) {
   .sort-select-container {
-    flex-direction: column;
+    gap: 20px;
+  }
+  
+  select {
+    width: 35vw;
+    background-position-x: 31vw;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .list-container {
+    padding: 40px 0 0 20px;
+  }
+
+  .list-item-container {
+    padding-right: 20px;
+  }
+  
+  .list-item-detail-container {
+    padding: 20px;
+  }
+  
+  .filter-sort-container {
+    padding: 0 20px 0 0;
+  }
+  
+  .sort-select-container {
+    flex-direction: row;
+    justify-content: space-between;
     gap: 10px;
+  }
+  
+  select {
+    width: 42vw;
+    background-position-x: 37vw;
   }
 }

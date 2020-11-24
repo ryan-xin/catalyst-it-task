@@ -6,11 +6,20 @@
   box-shadow: 0 20px 20px #E1EBEE;
 }
 
+/* -------------------- Responsive ------------------- */
+
 @media screen and (max-width: 1170px) {
   .main-container {
     flex-direction: column;
     width: 90vw;
     margin-top: 40px;
     height: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-container {
+    width: 100vw;
+    margin: 0;
   }
 }
