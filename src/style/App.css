@@ -5,3 +5,12 @@
   background-color: #FFFFFF;
   box-shadow: 0 20px 20px #E1EBEE;
 }
+
+@media screen and (max-width: 1170px) {
+  .main-container {
+    flex-direction: column;
+    width: 90vw;
+    margin-top: 40px;
+    height: auto;
+  }
+}

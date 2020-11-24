@@ -25,7 +25,7 @@ const Profile = () => {
     axios.get(ORG_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
-        'User-Agent': 'request'
+        'User-Agent': 'ryan-xin'
       }
     })
     .then(res => {

@@ -16,25 +16,36 @@ h1 {
 }
 
 .profile-container li {
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .profile-list-container-location {
   display: flex;
-  gap: 13px;
+  gap: 20px;
 }
 
 .profile-list-container-repos {
   display: flex;
-  gap: 12px;
+  gap: 19px;
 }
 
 .profile-list-container-blog {
   display: flex;
-  gap: 10px;
+  gap: 17px;
 }
 
 .profile-list-container-github {
   display: flex;
-  gap: 10px;
+  gap: 17px;
+}
+
+@media screen and (max-width: 1170px) {
+  .profile-container {
+    padding: 40px 40px 0 40px;
+    height: auto;
+  }
+  
+  .divider-profile {
+    margin: 20px 0;
+  }
 }

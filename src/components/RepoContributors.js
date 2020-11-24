@@ -13,7 +13,7 @@ const RepoContributors = (props) => {
     axios.get(REPO_CONTRIBUTORS_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
-        'User-Agent': 'request'
+        'User-Agent': 'ryan-xin'
       }
     })
     .then(res => {

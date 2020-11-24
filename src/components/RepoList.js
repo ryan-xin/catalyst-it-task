@@ -51,7 +51,7 @@ const RepoList = () => {
     axios.get(REQUEST_REPO_URL, {
       headers: {
         'Authorization': ACCESS_TOKEN,
-        'User-Agent': 'request'
+        'User-Agent': 'ryan-xin'
       }
     })
     .then(res => {
@@ -63,7 +63,23 @@ const RepoList = () => {
       setLoading(false);
     })
     .catch(err => console.log(err));
-  }, [page, type, sort, direction]);
+  }, [page]);
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get(REQUEST_REPO_URL, {
+      headers: {
+        'Authorization': ACCESS_TOKEN,
+        'User-Agent': 'ryan-xin'
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+      setRepos(res.data);
+      setLoading(false);
+    })
+    .catch(err => console.log(err));
+  }, [type, sort, direction]);
   
   return (
     <div className="list-container">
@@ -79,15 +95,15 @@ const RepoList = () => {
         <div>
           <h3>Sort</h3>
           <div className="sort-select-container">
-          <select type="text" name="sort" placeholder="created" onChange={handleSortChange}>
-            <option value="created">Created Time</option>
-            <option value="updated">Updated Time</option>
-            <option value="full_name">Full Name</option>
-          </select>
-          <select type="text" name="order" placeholder="asc" onChange={handleOrderChange}>
-            <option value="asc">Ascending Order</option>
-            <option value="desc">Descending Order</option>
-          </select>
+            <select type="text" name="sort" placeholder="created" onChange={handleSortChange}>
+              <option value="created">Created Time</option>
+              <option value="updated">Updated Time</option>
+              <option value="full_name">Full Name</option>
+            </select>
+            <select type="text" name="order" placeholder="asc" onChange={handleOrderChange}>
+              <option value="asc">Ascending Order</option>
+              <option value="desc">Descending Order</option>
+            </select>
           </div>
         </div>
       </div>
@@ -114,7 +130,7 @@ const RepoList = () => {
                       <p>GitHub URL:</p>
                       <h3>{repo.html_url}</h3>
                       <div className="two-columns-layout">
-                        <div className="two-columns-item">
+                        <div>
                           <p>Stars:</p>
                           <h3>{repo.stargazers_count}</h3>
                         </div>
@@ -122,7 +138,7 @@ const RepoList = () => {
                           <p>Watchers:</p>
                           <h3>{repo.watchers_count}</h3>
                         </div>
-                        <div className="two-columns-item">
+                        <div>
                           <p>Language:</p>
                           <h3>{repo.language}</h3>
                         </div>
@@ -160,7 +176,7 @@ const RepoList = () => {
                       <p>GitHub URL:</p>
                       <h3>{repo.html_url}</h3>
                       <div className="two-columns-layout">
-                        <div className="two-columns-item">
+                        <div>
                           <p>Stars:</p>
                           <h3>{repo.stargazers_count}</h3>
                         </div>
@@ -168,7 +184,7 @@ const RepoList = () => {
                           <p>Watchers:</p>
                           <h3>{repo.watchers_count}</h3>
                         </div>
-                        <div className="two-columns-item">
+                        <div>
                           <p>Language:</p>
                           <h3>{repo.language}</h3>
                         </div>

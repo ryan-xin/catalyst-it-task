@@ -63,7 +63,7 @@ p {
 
 /* -------------------- Small Desktop ------------------- */
 
-@media screen and (max-width: 1630px) {
+@media screen and (max-width: 1170px) {
   body,
   html {
     height: auto;
