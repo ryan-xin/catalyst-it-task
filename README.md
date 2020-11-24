@@ -12,4 +12,4 @@ Design tool: Sketch
 
 - Customize select dropdown style;
 - For mobile layout, fix filter section at the top of the screen;
-- Meet WCAG 2.1 Level AA guidelines for accessibility;
+- Refactor to meet WCAG 2.1 Level AA guidelines for accessibility;
