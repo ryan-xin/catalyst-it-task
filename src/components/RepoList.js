@@ -16,11 +16,21 @@ const RepoList = () => {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
   
+  const REQUEST_REPO_URL = `${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${page}`;
+  
+  // useRef is a value that persists after each render
+  // to store something between renders that isn't part of state 
+  // get references that related to document API
   const observer = useRef();
+  // use useCallback to call the function inside when the last repo of each request is created
   const lastRepoElement = useCallback(repo => {
+    // To prevent constant calling the api
     if (loading) return
+    // Stop to observe the intersection observer instance from previous element
     if (observer.current) observer.current.disconnect();
+    // Create an intersection observer instance (when the instance is intersecting with viewport run the callback)
     observer.current = new IntersectionObserver(entries => {
+      // Only when the instance is visible (entries[0])
       if (entries[0].isIntersecting && hasMore) {
         console.log('last');
         setPage(prevPage => {
@@ -28,11 +38,11 @@ const RepoList = () => {
         })
       }
     });
+    // Start to observe
     if (repo) observer.current.observe(repo);
     console.log(repo);
+    // Return a memorized version of callback that only changes if one of the dependencies has changed
   }, [loading, hasMore]);
-  
-  const REQUEST_REPO_URL = `${REPO_LIST_URL}?type=${type}&sort=${sort}&direction=${direction}&page=${page}`;
   
   const handleFilterChange = (e) => {
     setType(e.target.value);  
@@ -45,8 +55,10 @@ const RepoList = () => {
   const handleOrderChange = (e) => {
     setDirection(e.target.value);
   };
-
+  
+  // Page changes to run useEffect to append more repos to the end
   useEffect(() => {
+    // Show loading
     setLoading(true);
     axios.get(REQUEST_REPO_URL, {
       headers: {
@@ -56,6 +68,7 @@ const RepoList = () => {
     })
     .then(res => {
       console.log(res.data);
+      // Keep the previous repos and append new repos to the end
       setRepos(prevRepos => {
         return [...prevRepos, ...res.data]
       });
@@ -65,6 +78,7 @@ const RepoList = () => {
     .catch(err => console.log(err));
   }, [page]);
 
+  // Type / Sort / Direction change to run useEffect to get new repos
   useEffect(() => {
     setLoading(true);
     axios.get(REQUEST_REPO_URL, {
@@ -111,6 +125,7 @@ const RepoList = () => {
         <ul>
           {
             repos.map((repo, index) => {
+              {/* The last repo of each request */}
               if (repos.length === index + 1) {
                 return (
                   <li key={repo.id} ref={lastRepoElement}>

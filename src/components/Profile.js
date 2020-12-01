@@ -24,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     axios.get(ORG_URL, {
       headers: {
-        // 'Authorization': ACCESS_TOKEN,
+        'Authorization': ACCESS_TOKEN,
         // 'User-Agent': 'ryan-xin'
       }
     })
